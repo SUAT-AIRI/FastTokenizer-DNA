@@ -140,8 +140,11 @@
 ## 参考文献
 
 \[1] Sennrich, Rico, Barry Haddow, and Alexandra Birch. "Neural machine translation of rare words with subword units." ACL 2016.
+
 \[2] Kudo, Taku. "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates." ACL 2018.
+
 \[3] Matsumoto, T., Sadakane, K., & Imai, H. (2000). "Biological sequence compression algorithms." Genome Informatics.
+
 \[4] Virpioja et al. "Morfessor 2.0: Python implementation and extensions for Morfessor Baseline." Aalto University.
 
 ---
