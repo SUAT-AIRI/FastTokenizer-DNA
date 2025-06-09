@@ -5,7 +5,7 @@ import re
 import json
 import os
 
-class CustomTokenizer:
+class FastTokenizer:
     def __init__(self, long_tokens=None, vocab_size=1000):
         self.long_tokens = sorted(long_tokens or [], key=len, reverse=True)  # 长串优先匹配
         self.vocab_size = vocab_size
@@ -133,11 +133,11 @@ if __name__ == '__main__':
         ]:
             yield line
 
-    tokenizer = CustomTokenizer(long_tokens=long_tokens, vocab_size=100)
+    tokenizer = FastTokenizer(long_tokens=long_tokens, vocab_size=100)
     tokenizer.train(corpus_generator)
 
-    tokenizer.save("./saved_tokenizer")
-    tokenizer_loaded = CustomTokenizer.load("./saved_tokenizer")
+    tokenizer.save("./fast_tokenizer")
+    tokenizer_loaded = FastTokenizer.load("./fast_tokenizer")
 
     test = "ACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCT"
     ids = tokenizer_loaded.encode(test)

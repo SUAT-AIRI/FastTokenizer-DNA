@@ -1,7 +1,7 @@
 import json
 import os
 
-class BPEEncoder:
+class BPETokenizer:
     def __init__(self, vocab_size=1000):
         self.vocab_size = vocab_size
         self.vocab = set()
@@ -93,23 +93,24 @@ class BPEEncoder:
         tokenizer.id2token = {int(k): v for k, v in data["id2token"].items()}
         return tokenizer
 
-# 保存模型
-# Recreate and train BPE tokenizer
-bpe_tokenizer = BPEEncoder(vocab_size=100)
+if __name__ == '__main__':
+    # 保存模型
+    # Recreate and train BPE tokenizer
+    bpe_tokenizer = BPETokenizer(vocab_size=100)
 
-# Example corpus generator
-def corpus_generator():
-    for line in [
-        "ACGTACGTGATTACAGGCT",
-        "TATAAGCTAGACGT",
-        "GATTACAGATTACAGATTACA",
-    ]:
-        yield line
+    # Example corpus generator
+    def corpus_generator():
+        for line in [
+            "ACGTACGTGATTACAGGCT",
+            "TATAAGCTAGACGT",
+            "GATTACAGATTACAGATTACA",
+        ]:
+            yield line
 
-bpe_tokenizer.train(corpus_generator)
-bpe_tokenizer.save("bpe_tokenizer")
-tokenizer_loaded = bpe_tokenizer.load("./bpe_tokenizer")
-test = "ACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCT"
-ids = tokenizer_loaded.encode(test)
-print("Encoded:", ids)
-print("Decoded:", tokenizer_loaded.decode(ids))
+    bpe_tokenizer.train(corpus_generator)
+    bpe_tokenizer.save("bpe_tokenizer")
+    tokenizer_loaded = bpe_tokenizer.load("./bpe_tokenizer")
+    test = "ACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCT"
+    ids = tokenizer_loaded.encode(test)
+    print("Encoded:", ids)
+    print("Decoded:", tokenizer_loaded.decode(ids))

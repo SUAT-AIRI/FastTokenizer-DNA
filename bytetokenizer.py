@@ -1,5 +1,3 @@
-# byte_tokenizer.py
-
 import os
 import json
 

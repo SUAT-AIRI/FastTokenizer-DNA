@@ -76,13 +76,14 @@ def corpus_generator():
         "GATTACAGATTACAGATTACA",
     ]:
         yield line
-# Train and save unigram tokenizer
-unigram_tokenizer = UnigramTokenizer(vocab_size=100)
-unigram_tokenizer.train(corpus_generator)
-unigram_tokenizer.save("unigram_tokenizer")
-tokenizer_loaded = unigram_tokenizer.load("./unigram_tokenizer")
-test = "ACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCT"
-ids = tokenizer_loaded.encode(test)
-print("Encoded:", ids)
-print("Decoded:", tokenizer_loaded.decode(ids))
+if __name__ == '__main__':
+    # Train and save unigram tokenizer
+    unigram_tokenizer = UnigramTokenizer(vocab_size=100)
+    unigram_tokenizer.train(corpus_generator)
+    unigram_tokenizer.save("unigram_tokenizer")
+    tokenizer_loaded = unigram_tokenizer.load("./unigram_tokenizer")
+    test = "ACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCTACGTACGTGATTACATATAAGCT"
+    ids = tokenizer_loaded.encode(test)
+    print("Encoded:", ids)
+    print("Decoded:", tokenizer_loaded.decode(ids))
 

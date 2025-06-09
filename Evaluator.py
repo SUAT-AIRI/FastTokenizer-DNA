@@ -4,20 +4,20 @@ from typing import Dict, List
 import time
 import pandas as pd
 
-from bytetokenizer import ByteTokenizer
+from Bytetokenizer import ByteTokenizer
 # Load the three tokenizers
-from main import CustomTokenizer
-from BPE import BPEEncoder as BPETokenizer
-from Unigram import UnigramTokenizer
+from FastTokenizer import FastTokenizer
+from BPETokenizer import BPETokenizer
+from UnigramTokenizer import UnigramTokenizer
 
 # Paths to the saved tokenizers
-hybrid_path = "saved_tokenizer"
+fast_path = "fast_tokenizer"
 bpe_path = "bpe_tokenizer"
 unigram_path = "unigram_tokenizer"
 byte_path = "byte_tokenizer"
 
 # Load tokenizers
-hybrid_tokenizer = CustomTokenizer.load(hybrid_path)
+fast_tokenizer = FastTokenizer.load(fast_path)
 bpe_tokenizer = BPETokenizer.load(bpe_path)
 unigram_tokenizer = UnigramTokenizer.load(unigram_path)
 byte_tokenizer = ByteTokenizer.load(byte_path)
@@ -68,13 +68,13 @@ class TokenizerEvaluator:
             })
         return pd.DataFrame(results)
 
-# Run the evaluation
-evaluator = TokenizerEvaluator({
-    "Hybrid": hybrid_tokenizer,
-    "BPE": bpe_tokenizer,
-    "Unigram": unigram_tokenizer,
-    "byte": byte_tokenizer
-}, test_set)
-
-df_results = evaluator.evaluate()
-print(df_results)
+if __name__ == '__main__':
+    # Run the evaluation
+    evaluator = TokenizerEvaluator({
+        "Fast": fast_tokenizer,
+        "BPE": bpe_tokenizer,
+        "Unigram": unigram_tokenizer,
+        "Byte": byte_tokenizer
+    }, test_set)
+    df_results = evaluator.evaluate()
+    print(df_results)
